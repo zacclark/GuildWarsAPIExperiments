@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GuildWars stuff</title>
+        <!-- include libraries here... -->
+        <script type="text/javascript" src="lib/jquery.js"></script>
+        <script type="text/javascript" src="lib/underscore.js"></script>
+        <script type="text/javascript" src="lib/backbone.js"></script>
+
+        <!-- include source files here... -->
+        <script type="text/javascript" src="src/GWE.js"></script>
+        <script type="text/javascript" src="src/EventsService.js"></script>
+        <script type="text/javascript" src="src/World.js"></script>
+        <script type="text/javascript" src="src/Worlds.js"></script>
+        <script type="text/javascript" src="src/WorldPicker.js"></script>
+
+        <script type="text/javascript">
+          $(document).ready(function(){
+            var worlds = new GWE.Worlds();
+            var worldPicker = new GWE.WorldPicker({collection: worlds});
+
+            worldPicker.render();
+            $("body").append(worldPicker.$el);
+
+            worlds.fetch();
+          });
+        </script>
+    </head>
+    <body>
+        <h1>Hi!</h1>
+    </body>
+</html>

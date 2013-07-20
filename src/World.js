@@ -1,0 +1,1 @@
+GWE.World = Backbone.Model.extend({});
