@@ -1,6 +1,11 @@
 GWE.Events = Backbone.Collection.extend({
-  url: function () {
-    return "https://api.guildwars2.com/v1/events.json?world_id=1001";
+  initialize: function (options) {
+    this.worldID = options && options.worldID;
+  },
+
+  changeWorld: function(newWorldID) {
+    this.worldID = newWorldID;
+    this.fetch();
   },
 
   parse: function (response) {
@@ -8,15 +13,20 @@ GWE.Events = Backbone.Collection.extend({
   },
 
   fetch: function(options) {
+    if (this.worldID == undefined || this.worldID == "" || this.worldID == null) {
+      this.reset([]);
+      return;
+    }
+
     var collection = this;
 
     var rawEvents = [];
     var eventNames = [];
     var mapNames = [];
 
-    var eventsPromise = $.ajax({url: "https://api.guildwars2.com/v1/events.json?world_id=1001"});
+    var eventsPromise = $.ajax({url: "https://api.guildwars2.com/v1/events.json?world_id=" + this.worldID});
     eventsPromise.done(function(data){ rawEvents = data.events; });
-    var eventNamesPromise = $.ajax({url: "https://api.guildwars2.com/v1/event_names.json?world_id=1001"});
+    var eventNamesPromise = $.ajax({url: "https://api.guildwars2.com/v1/event_names.json?world_id=" + this.worldID});
     eventNamesPromise.done(function(data){ eventNames = data; });
     var mapNamesPromise = $.ajax({url: "https://api.guildwars2.com/v1/map_names.json"});
     mapNamesPromise.done(function(data){ mapNames = data; });

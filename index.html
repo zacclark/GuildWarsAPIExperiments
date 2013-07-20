@@ -18,22 +18,17 @@
         <script type="text/javascript">
           $(document).ready(function(){
             var worlds = new GWE.Worlds();
-            var worldPicker = new GWE.WorldPicker({collection: worlds});
+            var events = new GWE.Events();
 
+            var worldPicker = new GWE.WorldPicker({collection: worlds, eventsCollection: events});
             worldPicker.render();
             $("body").append(worldPicker.$el);
 
-            worlds.fetch();
-
-            // events
-
-            var events = new GWE.Events();
             var eventList = new GWE.EventList({collection: events});
-
             eventList.render();
             $("body").append(eventList.$el);
 
-            events.fetch({reset: true});
+            worlds.fetch();
           });
         </script>
     </head>
