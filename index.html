@@ -9,10 +9,11 @@
 
         <!-- include source files here... -->
         <script type="text/javascript" src="src/GWE.js"></script>
-        <script type="text/javascript" src="src/EventsService.js"></script>
         <script type="text/javascript" src="src/World.js"></script>
         <script type="text/javascript" src="src/Worlds.js"></script>
         <script type="text/javascript" src="src/WorldPicker.js"></script>
+        <script type="text/javascript" src="src/Events.js"></script>
+        <script type="text/javascript" src="src/EventList.js"></script>
 
         <script type="text/javascript">
           $(document).ready(function(){
@@ -23,6 +24,16 @@
             $("body").append(worldPicker.$el);
 
             worlds.fetch();
+
+            // events
+
+            var events = new GWE.Events();
+            var eventList = new GWE.EventList({collection: events});
+
+            eventList.render();
+            $("body").append(eventList.$el);
+
+            events.fetch({reset: true});
           });
         </script>
     </head>

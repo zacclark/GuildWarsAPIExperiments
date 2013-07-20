@@ -19,6 +19,6 @@ GWE.WorldPicker = Backbone.View.extend({
   },
 
   worldWasPicked: function (e) {
-
+    console.log(this.$el.val());
   }
 });
